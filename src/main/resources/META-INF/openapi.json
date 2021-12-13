@@ -1,0 +1,230 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "hackweek",
+        "version": "1.0.0",
+        "description": "Hack Week - Testing Schema Build",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        }
+    },
+    "paths": {
+        "/leopoi": {
+            "summary": "List of LeoPoI",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/LeoPoI"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "ok"
+                    }
+                },
+                "summary": "List LEO PoIs"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LeoPoI"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "leoPoI record created"
+                    }
+                },
+                "summary": "Create new LeoPoI"
+            }
+        },
+        "/accounts": {
+            "summary": "List Accounts",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Account"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "ok"
+                    }
+                },
+                "summary": "List Accounts"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Account"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "201": {
+                        "description": "Account created"
+                    }
+                },
+                "summary": "Create new account"
+            }
+        },
+        "/accounts/{id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Account"
+                                }
+                            }
+                        },
+                        "description": "get info from account"
+                    }
+                },
+                "summary": "Get an account"
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Account"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Account updated"
+                    }
+                },
+                "summary": "Update an account"
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "delete account"
+                    }
+                },
+                "summary": "Delete an account"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "description": "The account id",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "AccountBase": {
+                "title": "Root Type for account",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "contact": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "region": {
+                        "type": "string"
+                    },
+                    "segment": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "createdBy": {
+                        "type": "string"
+                    },
+                    "createDate": {
+                        "format": "date",
+                        "type": "string"
+                    },
+                    "updatedBy": {
+                        "type": "string"
+                    },
+                    "updateDate": {
+                        "format": "date",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "address": "streetabc",
+                    "contact": "contactname",
+                    "name": "abc",
+                    "region": "aaa",
+                    "segment": "aaa",
+                    "type": "aaa",
+                    "createdby": "aa",
+                    "createdate": "2021-01-01",
+                    "updatedby": "aa",
+                    "updatedate": "2021-01-01"
+                }
+            },
+            "Account": {
+                "title": "Root Type for Account",
+                "description": "",
+                "type": "object",
+                "allOf": [
+                    {
+                        "type": "object"
+                    }
+                ],
+                "properties": {
+                    "id": {
+                        "description": "",
+                        "type": "string"
+                    }
+                },
+                "example": "{\n    id = \"xxx\"\n}"
+            },
+            "LeoPoI": {
+                "title": "Root Type for LeoPoI",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "name": "aaa",
+                    "type": "typeA"
+                }
+            }
+        }
+    }
+}

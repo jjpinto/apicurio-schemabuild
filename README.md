@@ -1,2 +1,1 @@
-# apicurio-schemabuild
-hackweek - schema build 
+"# apicurio-playground" 
